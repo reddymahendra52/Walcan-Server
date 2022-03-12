@@ -4,7 +4,6 @@ const mongoose = require('mongoose');
 
 const typeDefs = require('./graphql/typeDefs');
 const resolvers = require('./graphql/resolvers/index');
-const { MONGODB } = require('./config.js');
 
 const pubsub = new PubSub();
 
@@ -17,7 +16,7 @@ const server = new ApolloServer({
 });
 
 mongoose
-  .connect(MONGODB, {useNewUrlParser: true,useUnifiedTopology: true})
+  .connect('mongodb+srv://reddymahendra52:M@hendra007@cluster0.oqwll.mongodb.net/myFirstDatabase?retryWrites=true&w=majority', {useNewUrlParser: true,useUnifiedTopology: true})
   .then(() => {
     console.log('MongoDB Connected');
     return server.listen({port: PORT });
