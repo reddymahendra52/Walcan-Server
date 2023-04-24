@@ -1,5 +1,6 @@
 const { ApolloServer, PubSub } = require('apollo-server');
 const mongoose = require('mongoose');
+require('dotenv').config()
 
 
 const typeDefs = require('./graphql/typeDefs');
@@ -16,12 +17,12 @@ const server = new ApolloServer({
 });
 
 mongoose
-  .connect('mongodb+srv://reddymahendra52:M@hendra007@cluster0.oqwll.mongodb.net/myFirstDatabase?retryWrites=true&w=majority', {useNewUrlParser: true,useUnifiedTopology: true})
+  .connect(process.env.MONGODB, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => {
     console.log('MongoDB Connected');
-    return server.listen({port: PORT });
+    return server.listen({ port: PORT });
   })
-  .then(res =>{
+  .then(res => {
     console.log(`Server running at ${res.url}`);
   })
   .catch(err => {
